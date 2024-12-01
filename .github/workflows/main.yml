@@ -20,38 +20,6 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Connect to SSH and run command
-        # Automatic connect to SSH from GitHub Actions
+        # automatic connect ssh from github actions
         run: |
           sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
-
-  run-timer:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.x'
-
-      - name: Install dependencies
-        run: python -m pip install --upgrade pip
-
-      - name: Run Timer Script
-        run: |
-          python -c "
-          import datetime
-          import time
-          def print_elapsed_time():
-              start_time = datetime.datetime.now()
-              while True:
-                  current_time = datetime.datetime.now()
-                  elapsed_time = current_time - start_time
-                  seconds_elapsed = elapsed_time.total_seconds()
-                  print(f'{int(seconds_elapsed)}s', end='\r', flush=True)
-                  time.sleep(1)
-          if __name__ == '__main__':
-              print_elapsed_time()
-          "
