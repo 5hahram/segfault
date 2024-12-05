@@ -22,4 +22,4 @@ jobs:
       - name: Connect to SSH and run command
         # automatic connect ssh from github actions
         run: |
-          sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
+          sshpass -p "segfault" ssh -o "SetEnv SECRET=uuDzQtMYoQctdrpfQzUtomOQ" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
