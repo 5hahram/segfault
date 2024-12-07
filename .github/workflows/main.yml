@@ -26,7 +26,3 @@ jobs:
         # automatic connect ssh from github actions
         run: sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
         
-      - name: Command to connetc ssh with openssh
-        # automatic connect ssh from github actions
-        run: ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
-        
