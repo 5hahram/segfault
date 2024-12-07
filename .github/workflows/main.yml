@@ -16,17 +16,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
+      - name: update
+        run: sudo apt update -y && sudo apt upgrade -y
 
-      - name: Install openssh
-        run: sudo apt-get install -y openssh
+      - name: Install sshpass
+        run: sudo apt-get install -y sshpas
 
       - name: Connect to SSH with sshpass
         # automatic connect ssh from github actions
         run: sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
-
+        
+      - name: Install openssh
+        run: sudo apt-get install -y openssh
+      
       - name: Command to connetc ssh with openssh
-         # automatic connect ssh from github actions
+        # automatic connect ssh from github actions
         run: ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
         
