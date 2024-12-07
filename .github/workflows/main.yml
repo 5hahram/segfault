@@ -20,7 +20,7 @@ jobs:
         run: sudo apt-get install -y sshpass
 
       - name: Install openssh
-        run: sudo apt install -y openssh
+        run: sudo apt-get install -y openssh
 
       - name: Connect to SSH with sshpass
         # automatic connect ssh from github actions
