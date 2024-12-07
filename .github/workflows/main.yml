@@ -19,7 +19,14 @@ jobs:
       - name: Install sshpass
         run: sudo apt-get install -y sshpass
 
-      - name: Connect to SSH and run command
+      - name: Install openssh
+        run: sudo apt-get install openssh -y
+
+      - name: Connect to SSH with sshpass
         # automatic connect ssh from github actions
-        run: |
-          sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
+        run: sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
+
+      - name: Command to connetc ssh with openssh
+         # automatic connect ssh from github actions
+        run: ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
+        
