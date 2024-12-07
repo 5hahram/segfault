@@ -20,7 +20,7 @@ jobs:
         run: sudo apt update -y && sudo apt upgrade -y
 
       - name: Install sshpass
-        run: sudo apt-get install -y sshpas
+        run: sudo apt-get install -y sshpass
 
       - name: Connect to SSH with sshpass
         # automatic connect ssh from github actions
