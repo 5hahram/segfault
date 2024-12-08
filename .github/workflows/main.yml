@@ -24,5 +24,6 @@ jobs:
 
       - name: Connect to SSH with sshpass
         # automatic connect ssh from github actions
-        run: sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
+        # sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net "ls"
+        run: sshpass -p "segfault" ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
         
