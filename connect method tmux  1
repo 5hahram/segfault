@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Check if tmux session exists
+if ! tmux has-session -t ssh_session 2>/dev/null; then
+  tmux new-session -d -s ssh_session "sshpass -p 'segfault' ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net"
+fi
+
+# Attach to the tmux session
+tmux attach-session -t ssh_session
+--------------------------------------------
+  name: Connect to SSH and Keep Alive with tmux
+
+on:
+  workflow_dispatch:
+
+jobs:
+  ssh-connect:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install sshpass and tmux
+      run: |
+        apt-get update && apt-get install -y sshpass tmux
+
+    - name: Run SSH Connection Script
+      run: |
+        bash connect_ssh.sh
+      continue-on-error: true
