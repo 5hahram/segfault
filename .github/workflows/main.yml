@@ -13,15 +13,14 @@ jobs:
       
     - name: Remove locks if exist
       run: |
-        sudo chmod 777 /var/lib/dpkg/
-        sudo chmod 777 /var/lib/dpkg/lock-frontend
-        sudo chmod 777 /var/lib/dpkg/lock
         sudo rm -f /var/lib/dpkg/lock-frontend
         sudo rm -f /var/lib/dpkg/lock
         sudo dpkg --configure -a
         
     - name: Install sshpass and tmux
-      run: sudo apt-get update && apt-get install -y sshpass tmux
+      run: |
+        sudo apt-get update -y
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y sshpass tmux
 
     - name: Run SSH Connection Script
       run: sudo bash connect_ssh.sh
