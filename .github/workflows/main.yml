@@ -11,6 +11,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: remove lock file
+      run: sudo rm /var/lib/dpkg/lock-frontend && sudo rm /var/lib/dpkg/lock
+
     - name: Install sshpass and tmux
       run: sudo apt-get update && apt-get install -y sshpass tmux
 
