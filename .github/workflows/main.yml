@@ -1,27 +1,21 @@
-name: SEGFAULT
+name: Connect to SSH and Keep Alive with tmux
 
 on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
-  schedule:
-    - cron: '*/20 * * * *' # Restart each 20 minutes
+  workflow_dispatch:
 
 jobs:
-  build:
+  ssh-connect:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: update
-        run: sudo apt update -y && sudo apt upgrade -y
+    - name: Install sshpass and tmux
+      run: |
+        apt-get update && apt-get install -y sshpass tmux
 
-      - name: Install sshpass
-        run: sudo apt-get install -y sshpass
-
-      - name: Connect to SSH with sshpass
-        # automatic connect ssh from github action sshpass -p "segfault" ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
-        run: sshpass -p "segfault" ssh -o "SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu" -o "StrictHostKeyChecking=no" root@lulz.segfault.net
+    - name: Run SSH Connection Script
+      run: |
+        bash connect_ssh.sh
+      continue-on-error: true
