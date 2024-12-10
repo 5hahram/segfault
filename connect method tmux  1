@@ -1,3 +1,7 @@
+nethod 1 connect ssh with tmux and script file
+
+
+
 #!/bin/bash
 
 # Check if tmux session exists
