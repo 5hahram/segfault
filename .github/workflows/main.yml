@@ -13,9 +13,9 @@ jobs:
 
     - name: Install sshpass and tmux
       run: |
-        apt-get update && apt-get install -y sshpass tmux
+        sudo apt-get update && apt-get install -y sshpass tmux
 
     - name: Run SSH Connection Script
       run: |
-        bash connect_ssh.sh
+        sudo bash connect_ssh.sh
       continue-on-error: true
