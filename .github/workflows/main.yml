@@ -13,6 +13,9 @@ jobs:
       
     - name: Remove locks if exist
       run: |
+        sudo chmod 777 /var/lib/dpkg/
+        sudo chmod 777 /var/lib/dpkg/lock-frontend
+        sudo chmod 777 /var/lib/dpkg/lock
         sudo rm -f /var/lib/dpkg/lock-frontend
         sudo rm -f /var/lib/dpkg/lock
         sudo dpkg --configure -a
