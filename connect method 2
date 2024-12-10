@@ -1,3 +1,5 @@
+method 2 for connect ssh
+
 name: Connect to SSH and Keep Alive
 
 on:
