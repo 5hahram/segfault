@@ -12,7 +12,7 @@ fi
 # Attach to the tmux session
 tmux attach-session -t ssh_session
 --------------------------------------------
-  name: Connect to SSH and Keep Alive with tmux
+name: Connect to SSH and Keep Alive with tmux
 
 on:
   workflow_dispatch:
@@ -24,12 +24,22 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-
+      
+    - name: Remove locks if exist
+      run: |
+        sudo rm -f /var/lib/dpkg/lock-frontend
+        sudo rm -f /var/lib/dpkg/lock
+        sudo dpkg --configure -a
+        
     - name: Install sshpass and tmux
       run: |
-        apt-get update && apt-get install -y sshpass tmux
+        sudo apt-get update -y
+        sudo DEBIAN_FRONTEND=noninteractive apt-get install -y sshpass tmux
 
     - name: Run SSH Connection Script
+      run: sudo bash connect_ssh.sh
+      continue-on-error: true
+H Connection Script
       run: |
         bash connect_ssh.sh
       continue-on-error: true
