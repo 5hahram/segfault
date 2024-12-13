@@ -16,5 +16,5 @@ jobs:
     - name: Connect to SSH using sshpass
       run: |
         apt-get update && apt-get install -y sshpass
-        sshpass -p "segfault" ssh -L5900:0:5900 -o 'SetEnv SECRET=zQuuUYjJLhOOhlaHtwuGlzAu' root@lulz.segfault.net
+        sshpass -p "segfault" ssh -L5900:0:5900 -o 'SetEnv SECRET=YOUR SECRET KEY' root@lulz.segfault.net
       continue-on-error: true
