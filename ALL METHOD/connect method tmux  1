@@ -1,44 +1,27 @@
 nethod 1 connect ssh unlimit with tmux and script file
 _____________________________________________________
-#!/bin/bash
+name: Connect to SSH UNLIMIT TIME with tmux
 
-# پورت VNC برای فورواردینگ
-VNC_PORT=5900
-REMOTE_SERVER="root@lulz.segfault.net"
+on:
+  workflow_dispatch:
 
-# Check if tmux session exists
-if ! tmux has-session -t ssh_session 2>/dev/null; then
-  echo "Starting new tmux session for SSH..."
-  tmux new-session -d -s ssh_session "sshpass -p 'segfault' ssh -L${VNC_PORT}:localhost:${VNC_PORT} -o 'SetEnv SECRET=YOUR SECRET KEY' ${REMOTE_SERVER}"
-else
-  echo "tmux session already exists."
-fi
+jobs:
+  ssh-connect:
+    runs-on: ubuntu-latest
 
-# Check if VNC server is running on remote server (not localhost)
-echo "Checking if VNC server is accessible on remote server ${REMOTE_SERVER} at port ${VNC_PORT}..."
-if nc -z ${REMOTE_SERVER} ${VNC_PORT}; then
-  echo "VNC server is accessible on ${REMOTE_SERVER}. You can connect using: vncviewer localhost:${VNC_PORT}"
-else
-  echo "Warning: VNC server on remote may not be running or accessible."
-fi
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-# Only attach session if running in a terminal
-if [ -t 1 ]; then
-  tmux attach-session -t ssh_session
-fi
+    - name: Install sshpass and tmux
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y sshpass tmux
 
-______________________________________________________
-#!/bin/bash
+    - name: Run SSH Connection Script in tmux
+      run: |
+        sudo tmux new-session -d -s ssh-session "bash connect_ssh.sh"
 
-# Check if tmux session exists
-if ! tmux has-session -t ssh_session 2>/dev/null; then
-  tmux new-session -d -s ssh_session "sshpass -p 'segfault' ssh -L5900:0:5900 -o 'SetEnv SECRET=YOUR SECRET KEY' root@lulz.segfault.net"
-fi
-
-# Only attach session if running in a terminal
-if [ -t 1 ]; then
-  tmux attach-session -t ssh_session
-fi
 _____________________________________________________
 name: Connect to SSH UNLIMIT TIME with tmux
 
